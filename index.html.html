@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nordly Delivery</title>
+  <meta name="description" content="Nordly Delivery — Courier profesional desde Edmonton hacia ciudades cercanas. Solicita envíos, cotiza y rastrea tu paquete."/>
+
+  <style>
+    :root{
+      --red:#d62828;
+      --maple:#ff6b21;
+      --bg:#f4f4f4;
+      --card:#fff;
+      --muted:#6b6b6b;
+      --accent:#25D366;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, Arial, sans-serif;
+      background:var(--bg);
+      color:#111;
+      line-height:1.45;
+    }
+
+    header{
+      background:linear-gradient(90deg,var(--red),var(--maple));
+      padding:28px 18px;
+      color:#fff;
+      text-align:center;
+    }
+    .logo{
+      max-width:160px;
+      display:block;
+      margin:0 auto 12px;
+    }
+    h1{
+      margin:6px 0;
+      font-size:28px;
+    }
+    p.lead{
+      opacity:.95;
+      margin:6px 0 0;
+    }
+
+    /* NAV */
+    nav{
+      display:flex;
+      gap:22px;
+      justify-content:center;
+      padding:12px;
+      background:#fff;
+      position:sticky;
+      top:0;
+      z-index:50;
+      border-bottom:1px solid #eee;
+    }
+    nav a{
+      color:var(--red);
+      text-decoration:none;
+      font-weight:600;
+    }
+
+    .container{
+      max-width:1100px;
+      margin:28px auto;
+      padding:0 18px;
+    }
+
+    .section{
+      background:var(--card);
+      border-radius:14px;
+      padding:28px;
+      margin-bottom:20px;
+      box-shadow:0 8px 28px rgba(0,0,0,0.06);
+    }
+    h2{
+      color:var(--red);
+      margin-top:0;
+      text-align:center;
+    }
+
+    /* grids */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .card{
+      padding:18px;
+      border-radius:10px;
+      border:1px solid #eee;
+      background:linear-gradient(180deg,#fff,#fbfbfb);
+    }
+
+    /* pricing */
+    table{
+      width:100%;
+      border-collapse:collapse;
+    }
+    th,td{
+      padding:14px;
+      border-bottom:1px solid #eee;
+      text-align:left;
+    }
+    th{
+      background:#fff8f6;
+    }
+
+    /* contact buttons */
+    .contact-buttons{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .contact-buttons a{
+      flex:1 1 200px;
+      text-align:center;
+      padding:12px;
+      border-radius:10px;
+      text-decoration:none;
+      color:#fff;
+      font-weight:700;
+    }
+    .phone{background:var(--red)}
+    .whatsapp{background:var(--accent)}
+    .email{background:#1a73e8}
+
+    /* floating button */
+    .floating-contact{
+      position:fixed;
+      bottom:18px;
+      right:18px;
+      background:var(--red);
+      color:#fff;
+      padding:14px;
+      border-radius:50px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      box-shadow:0 6px 20px rgba(0,0,0,0.25);
+      z-index:999;
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    /* map box */
+    .map-box{
+      height:320px;
+      border-radius:12px;
+      background:linear-gradient(180deg,#f7f7f9,#eef1f3);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#999;
+      font-weight:700;
+    }
+    /* Tracking */
+    .tracking{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .tracking input{
+      flex:1;
+      padding:12px;
+      border-radius:8px;
+      border:1px solid #ddd;
+    }
+    .tracking button{
+      padding:12px 18px;
+      border-radius:8px;
+      background:var(--maple);
+      border:none;
+      color:#fff;
+      font-weight:700;
+    }
+
+    /* WHY CHOOSE US / TESTIMONIALS */
+    .why-grid{
+      display:grid;
+      grid-template-columns:2fr 1fr;
+      gap:18px;
+    }
+    .testimonial{
+      background:#fff8f6;
+      border-left:4px solid var(--red);
+      padding:14px;
+      border-radius:8px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width:900px){
+      .grid{grid-template-columns:repeat(2,1fr);}
+      .why-grid{grid-template-columns:1fr;}
+      .card{padding:14px;}
+    }
+    @media (max-width:640px){
+      .grid{grid-template-columns:1fr;}
+      .contact-buttons a{flex:1 1 auto;width:100%;}
+      .logo{max-width:120px;}
+      .section{padding:18px;}
+    }
+
+    /* DARK MODE */
+    body.dark{
+      background:#0b0b0b;
+      color:#eee;
+    }
+    body.dark .section{
+      background:#121212;
+      border-color:#1f1f1f;
+      box-shadow:none;
+    }
+    body.dark nav{
+      background:#0f0f0f;
+    }
+    body.dark nav a{
+      color:#ffb199;
+    }
+
+    /* small text */
+    .tiny{
+      font-size:13px;
+      color:var(--muted);
+    }
+    .badge{
+      display:inline-block;
+      background:var(--maple);
+      color:#111;
+      padding:6px 10px;
+      border-radius:20px;
+      font-weight:700;
+    }
+
+    /* LANGUAGE SWITCH */
+    .lang-switch{
+      position:fixed;
+      left:18px;
+      top:18px;
+      background:#fff;
+      padding:8px 12px;
+      border-radius:20px;
+      border:1px solid #eee;
+      z-index:600;
+    }
+    body.dark .lang-switch{
+      background:#111;
+      border-color:#222;
+      color:#fff;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- LANGUAGE SWITCH -->
+  <div class="lang-switch">
+    <label class="tiny">Idioma:</label>
+    <select id="lang" onchange="setLang(this.value)">
+      <option value="es">Español</option>
+      <option value="en">English</option>
+    </select>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <img src="Nordly.png" alt="Nordly Logo" class="logo"/>
+    <h1 id="brand">Nordly Delivery</h1>
+    <p class="lead" id="tag">Fast • Reliable • Canadian Delivery</p>
+  </header>
+
+  <!-- NAVIGATION BAR -->
+  <nav>
+    <a href="#services" id="nav-services">Servicios</a>
+    <a href="#pricing" id="nav-pricing">Precios</a>
+    <a href="#coverage" id="nav-coverage">Cobertura</a>
+    <a href="#tracking" id="nav-tracking">Tracking</a>
+    <a href="#contact" id="nav-contact">Contacto</a>
+  </nav>
+
+  <div class="container">
+    <!-- SERVICES SECTION -->
+    <section id="services" class="section">
+      <h2>📦 <span id="services-title">Servicios</span></h2>
+      <div class="grid">
+
+        <div class="card">
+          <h3 id="daily">Daily Courier</h3>
+          <p id="daily-desc">
+            Same-day delivery available. Request before <strong>10:00 AM</strong> → Delivered by <strong>4:00 PM</strong>.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 id="pickup">Local Pickup</h3>
+          <p id="pickup-desc">
+            Starting at <strong>$20</strong>. Fast pickup from homes and businesses.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 id="scheduled">Scheduled Deliveries</h3>
+          <p id="scheduled-desc">
+            Weekly business routes and custom delivery programs available.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section id="pricing" class="section">
+      <h2>💰 <span id="pricing-title">Tarifas</span></h2>
+      <table>
+        <thead>
+          <tr>
+            <th id="th-service">Servicio</th>
+            <th id="th-price">Precio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="td-local">Local Pickup</td>
+            <td id="td-local-price">From $20</td>
+          </tr>
+          <tr>
+            <td id="td-town">Edmonton → Town Delivery</td>
+            <td id="td-town-price">$20–$60</td>
+          </tr>
+          <tr>
+            <td id="td-flat">Edmonton Flat Rate (0–100 lbs)</td>
+            <td id="td-flat-price">Starts at $35</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- COVERAGE SECTION -->
+    <section id="coverage" class="section">
+      <h2>🗺️ <span id="coverage-title">Cobertura</span></h2>
+
+      <div class="map-box">
+
+        <!-- SVG MAP -->
+        <svg width="90%" height="260" viewBox="0 0 900 260" preserveAspectRatio="xMidYMid meet">
+          <rect x="0" y="0" width="900" height="260" rx="12" fill="#fff" stroke="#eee" />
+
+          <!-- Cities -->
+          <circle cx="120" cy="200" r="8" fill="#d62828" />
+          <text x="140" y="205" font-size="14">Edmonton</text>
+
+          <circle cx="360" cy="160" r="6" fill="#ff6b21" />
+          <text x="380" y="165" font-size="14">Mundare</text>
+
+          <circle cx="600" cy="120" r="6" fill="#d62828" />
+          <text x="620" y="125" font-size="14">Vegreville</text>
+
+          <circle cx="820" cy="80" r="6" fill="#ff6b21" />
+          <text x="840" y="85" font-size="14">Two Hills</text>
+
+          <!-- Route Line -->
+          <path d="
+            M128 198 
+            C260 180 480 150 598 118 
+            C720 90 800 80 820 80
+          " 
+            stroke="#d62828"
+            stroke-width="4"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            opacity="0.9"
+          />
+        </svg>
+
+      </div>
+
+      <p class="tiny" style="text-align:center;margin-top:12px">
+        Departures daily. Route: Edmonton → Mundare → Vegreville → Two Hills
+      </p>
+    </section>
+
+    <!-- TRACKING SECTION -->
+    <section id="tracking" class="section">
+      <h2>🔍 <span id="tracking-title">Tracking</span></h2>
+      <div style="max-width:700px;margin:0 auto;">
+
+        <div class="tracking">
+          <input id="track-input"
+           placeholder="Enter Tracking Number / Introduce número de seguimiento" />
+          <button onclick="mockTrack()" id="track-btn">Track</button>
+        </div>
+
+        <div id="track-result" style="margin-top:14px;text-align:center;color:var(--muted);"></div>
+
+      </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section id="why" class="section">
+      <div class="why-grid">
+
+        <div>
+          <h2>¿Por qué elegir Nordly?</h2>
+          <p>
+            Somos un servicio local con rutas diarias y compromiso de entrega a tiempo.
+            Atención al cliente en español e inglés, manejo seguro de paquetes y tarifas transparentes.
+          </p>
+
+          <ul>
+            <li>Entrega el mismo día (solicitudes antes de las 10 AM)</li>
+            <li>Atención bilingüe</li>
+            <li>Tarifas claras y plan empresarial</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Testimonios</h3>
+          <div class="testimonial">
+            "Entrega puntual y servicio amable. Muy recomendable." — Local Business
+          </div>
+          <div style="height:12px"></div>
+          <div class="testimonial">
+            "Buen precio y excelentes comunicaciones." — Cliente
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PRICE REQUEST SECTION -->
+    <section id="request" class="section">
+      <h2>📨 <span id="request-title">Solicitar Precio</span></h2>
+
+      <form id="quote-form" onsubmit="requestQuote(event)">
+
+        <input id="q-name" placeholder="Nombre" required
+         style="width:100%;padding:12px;margin-bottom:12px;border-radius:8px;border:1px solid #eee;">
+
+        <input id="q-phone" placeholder="Teléfono" required
+         style="width:100%;padding:12px;margin-bottom:12px;border-radius:8px;border:1px solid #eee;">
+
+        <input id="q-from" placeholder="Recogida (ciudad)" required
+         style="width:100%;padding:12px;margin-bottom:12px;border-radius:8px;border:1px solid #eee;">
+
+        <input id="q-to" placeholder="Entrega (ciudad)" required
+         style="width:100%;padding:12px;margin-bottom:12px;border-radius:8px;border:1px solid #eee;">
+
+        <input id="q-weight" type="number" placeholder="Peso (lbs)" required
+         style="width:100%;padding:12px;margin-bottom:12px;border-radius:8px;border:1px solid #eee;">
+
+        <button type="submit"
+          style="background:var(--red);color:#fff;padding:14px;border:none;border-radius:10px;width:100%;font-weight:800">
+          Solicitar Precio
+        </button>
+
+      </form>
+
+      <p id="quote-result" class="tiny" style="margin-top:12px;text-align:center"></p>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="section">
+      <h2>📞 Contacto</h2>
+      <div class="contact-buttons">
+
+        <a class="phone" href="tel:17807207436">Llamar: 780-720-7436</a>
+        <a class="whatsapp" href="https://wa.me/17807207436">WhatsApp</a>
+        <a class="email" href="mailto:willymartens01@gmail.com">Email</a>
+
+      </div>
+      <p class="tiny" style="text-align:center;margin-top:12px">
+        Service: 5 days a week • Same-day cutoff: 10 AM • Delivery by 4 PM
+      </p>
+    </section>    <!-- FOOTER / POLICIES -->
+    <section class="section">
+      <h2>📄 Política y notas</h2>
+      <p class="tiny">
+        © 2025 Nordly Delivery. Use of this site is governed by terms and privacy policy.
+        This demo includes placeholders for integration (Onro, tracking, maps).
+      </p>
+    </section>
+
+  </div> <!-- END CONTAINER -->
+
+  <!-- FLOATING CALL BUTTON -->
+  <a class="floating-contact" href="tel:17807207436">📞 Llamar</a>
+
+  <!-- FOOTER TEXT -->
+  <div style="text-align:center;padding:30px;color:#777;font-size:14px">
+    Desarrollado para Nordly Delivery — listo para usar en Vercel o adaptar en Wix
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script>
+
+    /* ---------------------------
+       BILINGUAL TEXT CONTENT
+    ----------------------------*/
+    const texts = {
+      en: {
+        brand: 'Nordly Delivery',
+        tag: 'Fast • Reliable • Canadian Delivery',
+
+        'services-title':'Services',
+        'pricing-title':'Pricing',
+        'coverage-title':'Coverage',
+        'tracking-title':'Tracking',
+        'request-title':'Request Price',
+
+        daily:'Daily Courier',
+        dailyDesc:'Same-day delivery available. Request before 10:00 AM → Delivered by 4:00 PM.',
+
+        pickup:'Local Pickup',
+        pickupDesc:'Starting at $20. Fast pickup from homes and businesses.',
+
+        scheduled:'Scheduled Deliveries',
+        scheduledDesc:'Weekly business routes and custom delivery programs available.',
+
+        thService:'Service',
+        thPrice:'Price',
+
+        tdLocal:'Local Pickup',
+        tdLocalPrice:'From $20',
+
+        tdTown:'Edmonton → Town Delivery',
+        tdTownPrice:'$20–$60',
+
+        tdFlat:'Edmonton Flat Rate (0–100 lbs)',
+        tdFlatPrice:'Starts at $35',
+
+        contactMsg:'Service: 5 days a week • Same-day cutoff: 10 AM • Delivery by 4 PM'
+      },
+      es: {}
+    };
+
+    function setLang(lang){
+      if(lang==='en'){
+        document.getElementById('brand').innerText=texts.en.brand;
+        document.getElementById('tag').innerText=texts.en.tag;
+
+        document.getElementById('nav-services').innerText=texts.en['services-title'];
+        document.getElementById('nav-pricing').innerText=texts.en['pricing-title'];
+        document.getElementById('nav-coverage').innerText=texts.en['coverage-title'];
+        document.getElementById('nav-tracking').innerText=texts.en['tracking-title'];
+        document.getElementById('nav-contact').innerText='Contact';
+
+        document.getElementById('services-title').innerText=texts.en['services-title'];
+        document.getElementById('pricing-title').innerText=texts.en['pricing-title'];
+        document.getElementById('coverage-title').innerText=texts.en['coverage-title'];
+        document.getElementById('tracking-title').innerText=texts.en['tracking-title'];
+        document.getElementById('request-title').innerText=texts.en['request-title'];
+
+        document.getElementById('daily').innerText=texts.en.daily;
+        document.getElementById('daily-desc').innerText=texts.en.dailyDesc;
+
+        document.getElementById('pickup').innerText=texts.en.pickup;
+        document.getElementById('pickup-desc').innerText=texts.en.pickupDesc;
+
+        document.getElementById('scheduled').innerText=texts.en.scheduled;
+        document.getElementById('scheduled-desc').innerText=texts.en.scheduledDesc;
+
+        document.getElementById('th-service').innerText=texts.en.thService;
+        document.getElementById('th-price').innerText=texts.en.thPrice;
+
+        document.getElementById('td-local').innerText=texts.en.tdLocal;
+        document.getElementById('td-local-price').innerText=texts.en.tdLocalPrice;
+
+        document.getElementById('td-town').innerText=texts.en.tdTown;
+        document.getElementById('td-town-price').innerText=texts.en.tdTownPrice;
+
+        document.getElementById('td-flat').innerText=texts.en.tdFlat;
+        document.getElementById('td-flat-price').innerText=texts.en.tdFlatPrice;
+
+        document.querySelector('#contact .tiny').innerText=texts.en.contactMsg;
+      }
+      else{
+        location.reload(); /* Restore Spanish */
+      }
+    }
+
+
+    /* ---------------------------
+       MOCK TRACKING (placeholder)
+    ----------------------------*/
+    function mockTrack(){
+      const val = document.getElementById('track-input').value.trim();
+      const out = document.getElementById('track-result');
+
+      if(!val){
+        out.innerText='Please enter a tracking number / Introduce número.';
+        return;
+      }
+
+      out.innerText='Looking up tracking... (Onro integration coming soon)';
+
+      setTimeout(()=>{
+        out.innerText='Status: In transit — Expected delivery: Today by 4:00 PM';
+      },1200);
+    }
+
+
+    /* ---------------------------
+       QUOTE ESTIMATOR (simple)
+    ----------------------------*/
+    function requestQuote(e){
+      e.preventDefault();
+      const weight = Number(document.getElementById('q-weight').value || 0);
+
+      let price = 20;
+      if(weight>0){
+        if(weight<=100) price = 35;
+        else price = 35 + Math.ceil((weight-100)/50)*15;
+      }
+
+      document.getElementById('quote-result').innerText =
+        'Estimated price: $' + price + ' (approx.) — We will confirm via phone/email.';
+    }
+
+
+    /* ---------------------------
+       READY
+    ----------------------------*/
+    document.addEventListener('DOMContentLoaded',()=>{
+      if(window.innerWidth<640){
+        const el=document.querySelector('input');
+        if(el) el.setAttribute('inputmode','text');
+      }
+    });
+
+  </script>
+
+</body>
+</html>
+
+
